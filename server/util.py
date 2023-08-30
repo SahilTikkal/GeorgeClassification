@@ -2,6 +2,7 @@ from keras.models import load_model
 import tensorflow as tf
 import json
 import numpy as np
+import base64
 import cv2
 # from wavelet import w2d
 
@@ -9,11 +10,11 @@ __class_name_to_number = {}
 __class_number_to_name = {}
 __model = None
 
-def classify_image(file_path=None):
 
-    img = cv2.imread(file_path)
+def classify_image(image_base64_data, file_path=None):
+    img = get_base64_image(file_path, image_base64_data)
     result = []
-    resize = tf.image.resize(img, (256, 256))
+    resize = cv2.resize(img, (256, 256), interpolation=cv2.INTER_AREA)
     result.append({
             # 'class': class_number_to_name(__model.predict_classes(final)[0]),
             'class_probability': np.around(__model.predict(np.expand_dims(resize/255, 0)),2).tolist()[0],
@@ -39,6 +40,32 @@ def load_saved_artifacts():
     print("loading saved artifacts...done")
 
 
+def get_base64_image(image_path, image_base64_data):
+    if image_path is not None:
+        img = cv2.imread(image_path)
+        print(1)
+    else:
+        img = get_cv2_image_from_base64_string(image_base64_data)
+    return img
+
+
+def get_cv2_image_from_base64_string(b64str):
+    '''
+    credit: https://stackoverflow.com/questions/33754935/read-a-base-64-encoded-image-from-memory-using-opencv-python-library
+    :param uri:
+    :return:
+    '''
+    encoded_data = b64str.split(',')[1]
+    nparr = np.frombuffer(base64.b64decode(encoded_data), np.uint8)
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    return img
+
+def get_b64_test_image():
+    with open(r"E:\Project\GeorgeClassification\Test images\st.txt", "r") as f:
+        return f.read()
+
+
 if __name__ == '__main__':
     load_saved_artifacts()
-    print(classify_image(r"E:\Project\GeorgeClassification\Test images\hunter.jpeg"))
+    print(classify_image(get_b64_test_image(), None))
+    # print(classify_image(None,r"E:\Project\GeorgeClassification\Test images\img.png"))

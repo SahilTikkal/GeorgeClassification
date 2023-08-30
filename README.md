@@ -60,10 +60,9 @@ The image classification model is built using a deep learning architecture. It e
 ### Results
 The model's performance on the test dataset is as follows:
 
-Accuracy: XX%
-Precision: XX%
-Recall: XX%
-F1-Score: XX%
+  - Accuracy: 76.11%
+  - Precision: 79.41%
+  - Recall: 81.81%
 
 ### Contributing
 Contributions to this project are welcome. If you find any issues or have suggestions for improvement, feel free to submit a pull request or open an issue on the project repository.
