@@ -6,6 +6,8 @@ import base64
 import cv2
 # from wavelet import w2d
 
+
+
 __class_name_to_number = {}
 __class_number_to_name = {}
 __model = None
@@ -15,8 +17,11 @@ def classify_image(image_base64_data, file_path=None):
     img = get_base64_image(file_path, image_base64_data)
     result = []
     resize = cv2.resize(img, (256, 256), interpolation=cv2.INTER_AREA)
-    class_probability = [__model.predict(np.expand_dims(resize / 255, 0)),
-                  1-__model.predict(np.expand_dims(resize / 255, 0))]
+    pred = round(__model.predict(np.expand_dims(resize / 255, 0)).tolist()[0][0], 2)
+    # class_probability = [__model.predict(np.expand_dims(resize / 255, 0)),
+    #               1-__model.predict(np.expand_dims(resize / 255, 0))]
+    class_probability = [1-pred, pred]
+
 
     class_num = class_probability.index(max(class_probability))
     result.append({
@@ -71,5 +76,5 @@ def get_b64_test_image():
 
 if __name__ == '__main__':
     load_saved_artifacts()
-    print(classify_image(get_b64_test_image(), None))
-    # print(classify_image(None,r"E:\Project\GeorgeClassification\Test images\f3dd3201859ff67b986c4fe681788db5.jpg"))
+    # print(classify_image(get_b64_test_image(), None))
+    print(classify_image(None,r"E:\Project\GeorgeClassification\Test images\dragon.jpg"))

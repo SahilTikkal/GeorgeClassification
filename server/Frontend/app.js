@@ -1,5 +1,6 @@
 Dropzone.autoDiscover = false;
 
+
 function init() {
     let dz = new Dropzone("#dropzone", {
         url: "/",
@@ -58,7 +59,7 @@ function init() {
                 $("#error").show();
                 return;
             }
-            // let players = ["George", "Not George"];
+            let players = ["George", "Not George"];
             
             let match = null;
             let bestScore = -1;
