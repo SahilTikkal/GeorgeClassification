@@ -15,9 +15,13 @@ def classify_image(image_base64_data, file_path=None):
     img = get_base64_image(file_path, image_base64_data)
     result = []
     resize = cv2.resize(img, (256, 256), interpolation=cv2.INTER_AREA)
+    class_probability = [__model.predict(np.expand_dims(resize / 255, 0)),
+                  1-__model.predict(np.expand_dims(resize / 255, 0))]
+
+    class_num = class_probability.index(max(class_probability))
     result.append({
-            # 'class': class_number_to_name(__model.predict_classes(final)[0]),
-            'class_probability': np.around(__model.predict(np.expand_dims(resize/255, 0)),2).tolist()[0],
+            'class': class_number_to_name(class_num),
+            'class_probability': class_probability,
             'class_dictionary': __class_name_to_number
         })
     return result
@@ -68,4 +72,4 @@ def get_b64_test_image():
 if __name__ == '__main__':
     load_saved_artifacts()
     print(classify_image(get_b64_test_image(), None))
-    # print(classify_image(None,r"E:\Project\GeorgeClassification\Test images\img.png"))
+    # print(classify_image(None,r"E:\Project\GeorgeClassification\Test images\f3dd3201859ff67b986c4fe681788db5.jpg"))

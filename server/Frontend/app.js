@@ -5,7 +5,7 @@ function init() {
         url: "/",
         maxFiles: 1,
         addRemoveLinks: true,
-        dictDefaultMessage: "Some Message",
+        dictDefaultMessage: "Drag or open Images",
         autoProcessQueue: false
     });
     
@@ -58,7 +58,7 @@ function init() {
                 $("#error").show();
                 return;
             }
-            let players = ["lionel_messi", "maria_sharapova", "roger_federer", "serena_williams", "virat_kohli"];
+            // let players = ["George", "Not George"];
             
             let match = null;
             let bestScore = -1;
