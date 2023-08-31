@@ -3,9 +3,9 @@ import util
 
 app = Flask(__name__)
 
-@app.route('/hello', methods=['GET', 'POST'])
-def hello():
-    return "hello"
+# @app.route('/hello', methods=['GET', 'POST'])
+# def hello():
+#     return "hello"
 
 @app.route('/classify_image', methods=['GET', 'POST'])
 def classify_image():

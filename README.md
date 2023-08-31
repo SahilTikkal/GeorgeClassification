@@ -5,6 +5,8 @@ Classifying if the image contains St. George or not.
 
 Google colab link: https://colab.research.google.com/drive/18pfl9zIVTqtgC3bOnPpg8_-IA3XDHM_i#scrollTo=AaynBc9dPj3h
 
+pretrained VGG165 model : https://colab.research.google.com/drive/1MQ9A9mw_XVG9PEF98rQd2gY7ddGfhQPo#scrollTo=lrZAV4d_B9gK
+
 ### St. George's Image Classification Project Documentation
 ### Overview
 The St. George's Image Classification Project is a deep learning project aimed at classifying images as either "George" or "Not George." The project uses a deep learning model to analyze and predict whether an input image contains an image of St. George.
